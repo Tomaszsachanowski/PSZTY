@@ -1,2 +1,2 @@
 # PSZTY
-"Tomasz Sachanowski"
+"Tomasz Sachanowski i Aleksander Krzemiński"
