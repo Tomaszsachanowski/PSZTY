@@ -7,16 +7,16 @@ import numpy as np
 class Data:
     def __init__(self, filename):
         self.filename = filename
+        self.matrix = self.loadToMatrix()
     
     # load() function -> loads data from txt file 
     def loadToMatrix(self):
-        file = open(self.filename, "r")
+       with open(self.filename, "r") as file:
         return np.loadtxt(file, delimiter=',')
 
     # split() function -> creates tupla out of matrix columns
-    def split(self, matrix):
-        mdimm = matrix.shape
-        ncol = mdimm[1]
+    def split(self):
+        mdimm = self.matrix.shape[1]
         #hpslit - horizontal split
-        tupla = (np.hsplit(matrix, ncol))
+        tupla = (np.hsplit(self.matrix, mdimm))
         return tupla
