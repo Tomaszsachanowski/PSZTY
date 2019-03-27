@@ -33,9 +33,14 @@ class Populacja:
         # w petli bo mam zrobic lam potomkow
         for i in range(0, self.lam, 1):
             # losuje dwóch rodziców bez powtórzeń ale ze zwracaniem
-            rodzic_A, rodzic_B = sample(population=self.populacja_P, 2)
+            rodzic_A, rodzic_B = sample(population=self.populacja_P, k=2)
             wektor_sumy = (rodzic_A.wektor_wspol_w + rodzic_B.wektor_wspol_w)
             wektor_sr_arytm = wektor_sumy/2
             # tworze nowego osobnika
             potomek = Osobnik(wektor_wspol_w=wektor_sr_arytm, data=self.data)
             self.populacja_potomkow.append(potomek)
+
+    def selekcja_loss_1(self):
+        tmp = self.populacja_P + self.populacja_potomkow
+        tmp.sort(key=lambda osobnik: osobnik.wartosc_loss_1)
+        self.populacja_P = tmp[:self.mi]
