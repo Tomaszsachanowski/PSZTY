@@ -1,8 +1,4 @@
 # PSZTY
-<<<<<<< HEAD
-"Tomasz Sachanowski i Aleksander Krzemiński"
-JESTEM SUPER
-=======
 TM.AE.2. Niech D będzie danym zbiorem N d-wymiarowych wektorów xj liczb
 rzeczywistych, w którym xd  {0, 1}, natomiast h : R
 
@@ -34,4 +30,3 @@ związanych z algorytmem ewolucyjnym (takich jak: wielkość populacji,
 prawdopodobieństwo mutacji, jej maksymalna siła, itp.). W dokumentacji należy
 przedstawić swoje przemyślenia nad możliwością wykorzystania powyższego podejścia
 do problemu klasyfikacji binarnej.
->>>>>>> master
