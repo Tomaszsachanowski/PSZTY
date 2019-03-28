@@ -44,3 +44,8 @@ class Populacja:
         tmp = self.populacja_P + self.populacja_potomkow
         tmp.sort(key=lambda osobnik: osobnik.wartosc_loss_1)
         self.populacja_P = tmp[:self.mi]
+
+    def selekcja_loss_2(self):
+        tmp = self.populacja_P + self.populacja_potomkow
+        tmp.sort(key=lambda osobnik: osobnik.wartosc_loss_2)
+        self.populacja_P = tmp[:self.mi]
