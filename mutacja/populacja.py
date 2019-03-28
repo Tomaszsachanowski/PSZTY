@@ -16,9 +16,6 @@ class Populacja:
         """
         lam- liczba generowanych potomkow
         mi- liczba osobnikow w każdym pokoleniu
-        """
-
-        """ EDIT:
         pm - prawdopodobienstwo mutacji
         """
         self.data = data
@@ -34,12 +31,6 @@ class Populacja:
 
         self.populacja_potomkow = []
 
-    """ 
-    
-    EDIT: przy wywolywaniu trzeba podac prawdopodobienstwo mutacji
-    
-    """
-
     def krzyzowanie(self):
         # czyszcze liste aby tworzyc nowych potomkow
         self.populacja_potomkow.clear()
@@ -49,14 +40,9 @@ class Populacja:
             rodzic_A, rodzic_B = sample(population=self.populacja_P, k=2)
             wektor_sumy = (rodzic_A.wektor_wspol_w + rodzic_B.wektor_wspol_w)
             wektor_sr_arytm = wektor_sumy/2
-
-            """ EDIT Alek """
             # mutacja
             nowy_wektor = self.mutacja(wektor_sr_arytm)
-
             # tworze nowego osobnika
-            #potomek = Osobnik(wektor_wspol_w=wektor_sr_arytm, data=self.data)
-            """ EDIT """
             potomek = Osobnik(wektor_wspol_w=nowy_wektor, data=self.data)
             self.populacja_potomkow.append(potomek)
 
@@ -65,7 +51,7 @@ class Populacja:
         if random() < self.pm:
             # tworze wektor o takiej samej wielkosci jak wektor wspolczynnikow
             # i umieszczam w nim wylosowane prawdopodobienstwa
-            wektor_mutacji = np.random.normal(loc=1.0, scale=1.0, size=len(wektor_wspol[0]))
+            wektor_mutacji = np.random.normal(loc=1.0, scale=0.3, size=wektor_wspol.shape[0])
             wektor_wspol = wektor_wspol*wektor_mutacji
         return wektor_wspol
 
