@@ -15,7 +15,7 @@ class Osobnik:
         self.data = data
 
         self.wartosc_loss_1 = self.wartosc_loss(param=1)
-        # self.wartosc_loss_2 = self.wartosc_loss(param=2)
+        self.wartosc_loss_2 = self.wartosc_loss(param=2)
 
     def __Threshold_1(self, wektor_x):
         """
