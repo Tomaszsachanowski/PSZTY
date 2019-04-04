@@ -31,6 +31,21 @@ class Populacja:
 
         self.populacja_potomkow = []
 
+    def krzyzowanie_interpolacja(self):
+        # czyszcze liste aby tworzyc nowych potomkow
+        self.populacja_potomkow.clear()
+        # w petli bo mam zrobic lam potomkow
+        for i in range(0, self.lam, 1):
+            # losuje dwóch rodziców bez powtórzeń ale ze zwracaniem
+            rodzic_A, rodzic_B = sample(population=self.populacja_P, k=2)
+            a = np.random.rand(1)
+            wektor_interpolacji = a*rodzic_A.wektor_wspol_w + (1-a)*rodzic_B.wektor_wspol_w
+            # mutacja
+            nowy_wektor = self.mutacja(wektor_interpolacji)
+            # tworze nowego osobnika
+            potomek = Osobnik(wektor_wspol_w=nowy_wektor, data=self.data)
+            self.populacja_potomkow.append(potomek)
+
     def krzyzowanie(self):
         # czyszcze liste aby tworzyc nowych potomkow
         self.populacja_potomkow.clear()
