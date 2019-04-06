@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from populacja import Populacja
 from matplotlib.widgets import RadioButtons, Slider, Button
+import generujDane as gd
 
 
 class Aplikacja:
@@ -144,6 +145,7 @@ class Aplikacja:
                 self.ax.scatter(x[0], x[1], s=10, c="blue")
 
 
+<<<<<<< HEAD
 def generuj_dane():
     # Kazda z grup dzielimy na 3 cwiartki:
     # a1(I), a2(II), a3(IV)
@@ -230,8 +232,10 @@ def generuj_dane():
     return np.vstack([a1, b1])
 
 <<<<<<< HEAD
+=======
+>>>>>>> 395319674f035c776f33581f261e43dddca4091b
 if __name__ == "__main__":
-    B = generuj_dane()
+    B = gd.generuj_dane()
     app = Aplikacja(Populacja(30, 10, 0.2, B), B)
 =======
     app = Aplikacja(Populacja(40, 18, 0.2, B), B)
