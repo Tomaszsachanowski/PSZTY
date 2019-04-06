@@ -27,27 +27,16 @@ class Aplikacja:
 
         axpm = plt.axes([0.25, 0.0, 0.65, 0.03], facecolor='lightgoldenrodyellow')
         self.slider_pm =\
-<<<<<<< HEAD
-            Slider(axpm, 'PM', 0.0, 1.0, valinit=0.5)
-
-        axmi = plt.axes([0.25, 0.05, 0.65, 0.03], facecolor='lightgoldenrodyellow')
-=======
             Slider(axpm, 'PM', 0.0, 1.0, valinit=self.populacja.pm)
         
         axmi = plt.axes([0.25, 0.05, 0.65, 0.03], facecolor='lightgoldenrodyellow')                 
->>>>>>> 6f12f73f85324f9b325a7c53a864a819f6753be9
         self.slider_mi =\
             Slider(axmi, 'MI', 10, 30, valinit=self.populacja.mi, valfmt="%i")
 
         axlam = plt.axes([0.25, 0.1, 0.65, 0.03], facecolor='lightgoldenrodyellow')
         self.slider_lam =\
-<<<<<<< HEAD
-            Slider(axlam, 'LAM', 30, 100, valinit=0.5, valfmt="%i")
-
-=======
             Slider(axlam, 'LAM', 30, 100, valinit=self.populacja.lam, valfmt="%i")
         
->>>>>>> 6f12f73f85324f9b325a7c53a864a819f6753be9
         plt.subplots_adjust(bottom=0.2, left=0.26)
 
         self.slider_pm.on_changed(self.update_pm)
@@ -131,13 +120,10 @@ class Aplikacja:
 
         x = np.linspace(-2, 2, 10)
 
-<<<<<<< HEAD
-=======
         for os in self.populacja.populacja_potomkow:
             wsp_a = -os.wektor_wspol_w[1]/os.wektor_wspol_w[2]
             wsp_b = -os.wektor_wspol_w[0]/os.wektor_wspol_w[2]
             self.ax.plot(x, wsp_a*x+wsp_b, '-y', alpha=0.4)
->>>>>>> 6f12f73f85324f9b325a7c53a864a819f6753be9
         for x in self.data:
             if x[2] == 0.:
                 self.ax.scatter(x[0], x[1], s=10, c="green")
