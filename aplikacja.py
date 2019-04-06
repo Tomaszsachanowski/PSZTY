@@ -26,16 +26,27 @@ class Aplikacja:
 
         axpm = plt.axes([0.25, 0.0, 0.65, 0.03], facecolor='lightgoldenrodyellow')
         self.slider_pm =\
+<<<<<<< HEAD
             Slider(axpm, 'PM', 0.0, 1.0, valinit=0.5)
 
         axmi = plt.axes([0.25, 0.05, 0.65, 0.03], facecolor='lightgoldenrodyellow')
+=======
+            Slider(axpm, 'PM', 0.0, 1.0, valinit=self.populacja.pm)
+        
+        axmi = plt.axes([0.25, 0.05, 0.65, 0.03], facecolor='lightgoldenrodyellow')                 
+>>>>>>> 6f12f73f85324f9b325a7c53a864a819f6753be9
         self.slider_mi =\
-            Slider(axmi, 'MI', 10, 30, valinit=0.5, valfmt="%i")
+            Slider(axmi, 'MI', 10, 30, valinit=self.populacja.mi, valfmt="%i")
 
         axlam = plt.axes([0.25, 0.1, 0.65, 0.03], facecolor='lightgoldenrodyellow')
         self.slider_lam =\
+<<<<<<< HEAD
             Slider(axlam, 'LAM', 30, 100, valinit=0.5, valfmt="%i")
 
+=======
+            Slider(axlam, 'LAM', 30, 100, valinit=self.populacja.lam, valfmt="%i")
+        
+>>>>>>> 6f12f73f85324f9b325a7c53a864a819f6753be9
         plt.subplots_adjust(bottom=0.2, left=0.26)
 
         self.slider_pm.on_changed(self.update_pm)
@@ -117,8 +128,15 @@ class Aplikacja:
             wsp_b = -os.wektor_wspol_w[0]/os.wektor_wspol_w[2]
             self.ax.plot(x, wsp_a*x+wsp_b, '-r')
 
-        x = np.linspace(-2, 2, 20)
+        x = np.linspace(-2, 2, 10)
 
+<<<<<<< HEAD
+=======
+        for os in self.populacja.populacja_potomkow:
+            wsp_a = -os.wektor_wspol_w[1]/os.wektor_wspol_w[2]
+            wsp_b = -os.wektor_wspol_w[0]/os.wektor_wspol_w[2]
+            self.ax.plot(x, wsp_a*x+wsp_b, '-y', alpha=0.4)
+>>>>>>> 6f12f73f85324f9b325a7c53a864a819f6753be9
         for x in self.data:
             if x[2] == 0.:
                 self.ax.scatter(x[0], x[1], s=10, c="green")
@@ -131,6 +149,7 @@ def generuj_dane():
     # a1(I), a2(II), a3(IV)
     # b1(III), b2(II), b3(IV)
     # i losujemy dla kazdej cwiartki punkty
+<<<<<<< HEAD
     a1 = 2*(np.random.rand(200, 2))
     a2 = 2*(np.random.rand(200, 2))
     a3 = 2*(np.random.rand(200, 2))
@@ -143,6 +162,15 @@ def generuj_dane():
     b1 = -2*(np.random.rand(200, 2))
     b2 = -2*(np.random.rand(200, 2))
     b3 = -2*(np.random.rand(200, 2))
+=======
+
+    a1 = 2*(np.random.rand(200,2))
+    a2 = 2*(np.random.rand(200,2))
+    a3 = 2*(np.random.rand(200,2))
+    b1 = -2*(np.random.rand(200,2))
+    b2 = -2*(np.random.rand(200,2))
+    b3 = -2*(np.random.rand(200,2))
+>>>>>>> 6f12f73f85324f9b325a7c53a864a819f6753be9
 
     # Zamiana wspolrzednych tak, aby punkty
     # z danego obszaru znajdowaly sie w
@@ -201,6 +229,10 @@ def generuj_dane():
     # Zwracamy wynik w postaci zlaczenia a1 z b1
     return np.vstack([a1, b1])
 
+<<<<<<< HEAD
 if __name__ == "__main__":
     B = generuj_dane()
     app = Aplikacja(Populacja(30, 10, 0.2, B), B)
+=======
+    app = Aplikacja(Populacja(40, 18, 0.2, B), B)
+>>>>>>> 6f12f73f85324f9b325a7c53a864a819f6753be9
