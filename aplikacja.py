@@ -27,15 +27,15 @@ class Aplikacja:
 
         axpm = plt.axes([0.25, 0.0, 0.65, 0.03], facecolor='lightgoldenrodyellow')                 
         self.slider_pm =\
-            Slider(axpm, 'PM', 0.0, 1.0, valinit=0.5)
+            Slider(axpm, 'PM', 0.0, 1.0, valinit=self.populacja.pm)
         
         axmi = plt.axes([0.25, 0.05, 0.65, 0.03], facecolor='lightgoldenrodyellow')                 
         self.slider_mi =\
-            Slider(axmi, 'MI', 10, 30, valinit=0.5, valfmt="%i")
+            Slider(axmi, 'MI', 10, 30, valinit=self.populacja.mi, valfmt="%i")
 
         axlam = plt.axes([0.25, 0.1, 0.65, 0.03], facecolor='lightgoldenrodyellow')                 
         self.slider_lam =\
-            Slider(axlam, 'LAM', 30, 100, valinit=0.5, valfmt="%i")
+            Slider(axlam, 'LAM', 30, 100, valinit=self.populacja.lam, valfmt="%i")
         
         plt.subplots_adjust(bottom=0.2, left=0.26)
 
@@ -109,12 +109,12 @@ class Aplikacja:
             wsp_b = -os.wektor_wspol_w[0]/os.wektor_wspol_w[2]
             self.ax.plot(x, wsp_a*x+wsp_b, '-r')
 
-        x = np.linspace(-2, 2, 20)
+        x = np.linspace(-2, 2, 10)
 
-        # for os in self.populacja.populacja_potomkow:
-        #     wsp_a = -os.wektor_wspol_w[1]/os.wektor_wspol_w[2]
-        #     wsp_b = -os.wektor_wspol_w[0]/os.wektor_wspol_w[2]
-        #     self.ax.plot(x, wsp_a*x+wsp_b, '-y')
+        for os in self.populacja.populacja_potomkow:
+            wsp_a = -os.wektor_wspol_w[1]/os.wektor_wspol_w[2]
+            wsp_b = -os.wektor_wspol_w[0]/os.wektor_wspol_w[2]
+            self.ax.plot(x, wsp_a*x+wsp_b, '-y', alpha=0.4)
         for x in self.data:
             if x[2] == 0.:
                 self.ax.scatter(x[0], x[1], s=10, c="green")
@@ -135,12 +135,6 @@ if __name__ == "__main__":
     b1 = -2*(np.random.rand(200,2))
     b2 = -2*(np.random.rand(200,2))
     b3 = -2*(np.random.rand(200,2))
-    a1 = 2*(np.random.rand(200, 2))
-    a2 = 2*(np.random.rand(200, 2))
-    a3 = 2*(np.random.rand(200, 2))
-    b1 = -2*(np.random.rand(200, 2))
-    b2 = -2*(np.random.rand(200, 2))
-    b3 = -2*(np.random.rand(200, 2))
 
     # Zamiana wspolrzednych tak, aby punkty 
     # z danego obszaru znajdowaly sie w 
@@ -199,4 +193,4 @@ if __name__ == "__main__":
     B = np.vstack([a1,b1])
 
 
-    app = Aplikacja(Populacja(30, 10, 0.2, B), B)
+    app = Aplikacja(Populacja(40, 18, 0.2, B), B)
