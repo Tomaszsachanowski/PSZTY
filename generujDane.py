@@ -27,12 +27,6 @@ def generuj_dane():
     b1 = -2*(np.random.rand(200, 2))
     b2 = -2*(np.random.rand(200, 2))
     b3 = -2*(np.random.rand(200, 2))
-    a1 = 2*(np.random.rand(200, 2))
-    a2 = 2*(np.random.rand(200, 2))
-    a3 = 2*(np.random.rand(200, 2))
-    b1 = -2*(np.random.rand(200, 2))
-    b2 = -2*(np.random.rand(200, 2))
-    b3 = -2*(np.random.rand(200, 2))
 
     # Zamiana wspolrzednych tak, aby punkty
     # z danego obszaru znajdowaly sie w
