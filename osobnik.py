@@ -10,11 +10,17 @@ import numpy as np
 class Osobnik:
 
     def __init__(self, wektor_wspol_w, data):
-
+        """
+        klasa reprezentujaca pojedynczego osobnika
+        populacji w algorytmie ewolucyjnym
+        wektor_wspol_w - poszukiwany zbior rozwiazan
+        data - dane bedace kryterium oceny wektora_wspol_w
+        """
         self.wektor_wspol_w = wektor_wspol_w
         self.data = data
-
+        # wartosc_loss_1 wyliczana ze wzgledu na treshold_1
         self.wartosc_loss_1 = self.wartosc_loss(param=1)
+        # wartosc_loss_2 wyliczana ze wzgledu na treshold_2
         self.wartosc_loss_2 = self.wartosc_loss(param=2)
 
     def __Threshold_1(self, wektor_x):
@@ -53,7 +59,14 @@ class Osobnik:
         return sigmoida
 
     def wartosc_loss(self, param):
+        """
+        metoda ktora wylicza wartosc loss
+        ze wzgledu na param - 1,2
+        oznaczajace ktory treshold uzyjemy
+        """
+        # inicjujemy poczatkwoa wartossc 
         tmp = 0
+        # przechodzimy po calym zbiorze wektorow
         for wektor_xi in self.data:
             if param == 1:
                 treshold = self.__Threshold_1(wektor_xi)

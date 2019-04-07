@@ -6,12 +6,22 @@ import generujDane as gd
 
 
 class Aplikacja:
+    """
+    klasa wizualzujaca kolejne kroki algorytmu
+    ewolucyjnego
+    """
     def __init__(self, populacja, data):
-
+        """
+        populacja - populacja bedaca podanna ewolucji
+        data - dane okreslajace nasze srodowisko
+        """
+        # flagi okreslaja jakie krzyzowanie i threshold uzywamy 
         self.flaga_krzyzowanie = 0
         self.flaga_threshold = 0
+
         self.data = data
         self.populacja = populacja
+        # fig nasz okienko z widgetami
         self.fig, self.ax = plt.subplots()
 
         # Tworzenie i ustawianie elementow graficznych w aplikacji
@@ -37,8 +47,10 @@ class Aplikacja:
         self.slider_lam =\
             Slider(axlam, 'LAM', 30, 100, valinit=self.populacja.lam, valfmt="%i")
         
+        # ustawienienie wymiarow okienaka przestrzeni 2D
         plt.subplots_adjust(bottom=0.2, left=0.26)
 
+        # nasluchiwanie i reagowanie na zdarzenia wyboru w gadzetach
         self.slider_pm.on_changed(self.update_pm)
         self.slider_mi.on_changed(self.update_mi)
         self.slider_lam.on_changed(self.update_lam)
@@ -47,18 +59,23 @@ class Aplikacja:
         self.bttn_go.on_clicked(self.go)
         self.bttn_skip.on_clicked(self.skip)
 
+        # rysowanie rozwiazn algorytmu ewolucyjnego ze zbiorem danych
         self.rysuj_rodzica()
         plt.show()
 
-    # Funkcja pozwalajaca na przejscie 10 pokolen
-    # za pomoca wywolania funkcji go w petli
     def skip(self, event):
+        """
+        Funkcja pozwalajaca na przejscie 10 pokolen
+        za pomoca wywolania funkcji go w petli
+        """
         for x in range(0, 10, 1):
             self.go(event)
 
     # Funkcja pozwalajaca na przejscie 1 pokolenia
     def go(self, event):
-        self.bttn_go.label.set_text("licze..")
+        """
+        Funkcja pozwalajaca na przejscie 1 pokolenia
+        """
         if self.flaga_krzyzowanie == 0:
             self.populacja.krzyzowanie()
         else:
@@ -69,11 +86,14 @@ class Aplikacja:
             self.populacja.selekcja_loss_2()
         self.ax.cla()
         self.rysuj_rodzica()
-        self.bttn_go.label.set_text("GO")
 
     # Funkcja zmieniajaca wartosc zmiennej flaga_threshold
     # reagujaca na wcisniecie radio buttona
     def rodzaj_threshold(self, event):
+        """
+        Funkcja zmieniajaca wartosc zmiennej flaga_threshold
+        reagujaca na wcisniecie radio buttona
+        """
         if event == "threshold_1":
             self.flaga_threshold = 0
         else:
@@ -82,40 +102,58 @@ class Aplikacja:
     # Funkcja zmieniajaca wartosc zmiennej flaga_krzyzowanie
     # reagujaca na wcisniecie radio buttona
     def rodzaj_krzyzowania(self, event):
+        """
+        Funkcja zmieniajaca wartosc zmiennej flaga_krzyzowanie
+        reagujaca na wcisniecie radio buttona
+        """
         if event == "usrednianie":
             self.flaga_krzyzowanie = 0
         else:
             self.flaga_krzyzowanie = 1
 
-    # Funkcja uaktualniajaca pm - prawdopodobienstwo mutacji
     def update_pm(self, val):
+        """
+        Funkcja uaktualniajaca pm - prawdopodobienstwo mutacji
+        """
         self.populacja.pm = val
 
-    # Funkcja uaktualniajaca mi - wielkosc populacji
     def update_mi(self, val):
+        """
+        Funkcja uaktualniajaca mi - wielkosc populacji
+        """
         self.populacja.mi = int(val)
 
-    # Funkcja uaktualniajaca lam - lambda, ilosc potomkow
     def update_lam(self, val):
+        """
+        Funkcja uaktualniajaca lam - lambda, ilosc potomkow
+        """
         self.populacja.lam = int(val)
 
     # Funkcja rysujaca rodzicow
     def rysuj_rodzica(self):
-
+        """
+        metoda rysujaca zbior danych, prostych rodzicow i
+        potomkow
+        """
+        # ustaawim osie wspolrzednych
         self.ax.spines['left'].set_position('center')
         self.ax.spines['bottom'].set_position('center')
         self.ax.spines['right'].set_color('none')
         self.ax.spines['top'].set_color('none')
         self.ax.xaxis.set_ticks_position('bottom')
         self.ax.yaxis.set_ticks_position('left')
+        # ustawiam szerokosc wysokoc ukazanej plaszczyzny
         self.ax.set_xlim(-2, 2)
         self.ax.set_ylim(-2, 2)
 
+        # nasz dx do prostej x0 xi = xi-1 +dx
         x = np.linspace(-2, 2, 20)
 
+        # wyznaczam rowanie prostej
         for os in self.populacja.populacja_P:
             wsp_a = -os.wektor_wspol_w[1]/os.wektor_wspol_w[2]
             wsp_b = -os.wektor_wspol_w[0]/os.wektor_wspol_w[2]
+            # rysuje prosta
             self.ax.plot(x, wsp_a*x+wsp_b, '-r')
 
         x = np.linspace(-2, 2, 10)
@@ -124,6 +162,9 @@ class Aplikacja:
             wsp_a = -os.wektor_wspol_w[1]/os.wektor_wspol_w[2]
             wsp_b = -os.wektor_wspol_w[0]/os.wektor_wspol_w[2]
             self.ax.plot(x, wsp_a*x+wsp_b, '-y', alpha=0.4)
+        
+        # rysuje zbior punktow pdozial na kolory ze wzgledu
+        # na ostatnia wspolrzedna
         for x in self.data:
             if x[2] == 0.:
                 self.ax.scatter(x[0], x[1], s=10, c="green")
