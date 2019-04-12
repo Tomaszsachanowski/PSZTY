@@ -171,6 +171,7 @@ class Aplikacja:
             else:
                 self.ax.scatter(x[0], x[1], s=10, c="blue")
 
+# uruchomienie apliakcji z przykładowym zbiorem i populacja
 if __name__ == "__main__":
     B = gd.generuj_dane()
     app = Aplikacja(Populacja(40, 20, 0.35, B), B)

@@ -15,6 +15,11 @@ def iris_two_collection(iris, num_one, num_two):
     """
     X_reduced = PCA(n_components=3).fit_transform(iris.data)
     # przekształcam dane na połoznie w przestrzeni
+
+    # kazda grupa irysów to klejne 50 elementów mamy 3 klasy
+    # rozdzielenie klas po przez dodanie 0 lub 1 w ostatniej kolumnie
+    # ustawienie 0 lub 1 pozwala nam rozrużniać irysy na dwie klasy
+    # a, b, c to kolejne klasy irysow i odpowienio do nich ustawiamy 0,1
     if num_one == 0:
             if num_two == 1:
                     a = np.append(X_reduced[0:50,], np.ones((len(X_reduced[0:50,]), 1)), axis=1)
@@ -28,7 +33,8 @@ def iris_two_collection(iris, num_one, num_two):
             a = np.append(X_reduced[0:50,], np.ones((len(X_reduced[0:50,]), 1)), axis=1)
             b = np.append(X_reduced[50:100,], np.zeros((len(X_reduced[50:100,]), 1)), axis=1)
             c = np.append(X_reduced[100:,], np.zeros((len(X_reduced[100:,]), 1)), axis=1)
-
+    
+    # polaczenie zbiorow a,b,c w jedno
     x = np.vstack([a, b])
     x = np.vstack([x, c])
     return x 
